@@ -1,1 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEG | Creative Digital Agency</title>
+    
+    <!-- Fonts: Space Grotesk for Headings, Inter for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons: FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg: #fffaf4;
+            --bg-light: #f5efe6;
+            --bg-white: #ffffff;
+            --accent: #ff7a3c;
+            --accent-soft: #ffd7c3;
+            --text: #1f1f1f;
+            --muted: #6b6b6b;
+            --border: #e5e5e5;
+            
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-head);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .text-center { text-align: center; }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--accent), #ff4d4d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 250, 244, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            color: var(--text);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: var(--text);
+            color: var(--bg);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .hamburger { display: none; cursor: pointer; font-size: 24px; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+        .shape-1 { width: 400px; height: 400px; background: var(--accent-soft); top: -100px; right: -100px; }
+        .shape-2 { width: 300px; height: 300px; background: #e0f7fa; bottom: 100px; left: -100px; }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 64px;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text);
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card {
+            background: var(--bg-white);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            transform: rotate(3deg);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-card:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .hero-video-card {
+            max-width: 300px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .hero-video-container {
+            max-width: 300px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 177.77%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #000;
+        }
+
+        .hero-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .hero-card img {
+            border-radius: 12px;
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about {
+            background: var(--bg-white);
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+            max-width: 600px;
+        }
+
+        .section-header h2 {
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .process-card {
+            background: var(--bg);
+            padding: 40px 30px;
+            border-radius: 16px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .process-card:hover {
+            background: var(--bg-white);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            border-color: var(--accent-soft);
+            transform: translateY(-10px);
+        }
+
+        .process-icon {
+            font-size: 32px;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .process-card h3 {
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .process-card p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* --- SERVICES SECTION --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-white);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: var(--transition);
+            transform-origin: bottom;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .service-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* --- PORTFOLIO SECTION (MOBILE OPTIMIZED) --- */
+        .portfolio {
+            background: var(--bg-white);
+        }
+
+        .portfolio-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .portfolio-tabs button {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-body);
+            white-space: nowrap;
+            min-height: 44px;
+        }
+
+        .portfolio-tabs button.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .portfolio-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .portfolio-content.active {
+            display: block;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .video-wrapper {
+            aspect-ratio: 9 / 16;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            background: var(--bg-light);
+        }
+
+        .video-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 122, 60, 0.2);
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Branding & Website Grid */
+        .branding-grid, .website-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 0 10px;
+        }
+
+        .project-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 122, 60, 0.15);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .project-info p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- CONTACT SECTION (UPDATED - CENTERED) --- */
+        .contact {
+            background: var(--bg-white);
+            position: relative;
+        }
+
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: var(--muted);
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            margin: 0 auto;
+            max-width: 350px;
+        }
+
+        .contact-link-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--text);
+            transition: var(--transition);
+            padding: 12px 24px;
+            border-radius: 12px;
+            background: var(--bg-light);
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .contact-link-item i {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .contact-link-item:hover {
+            color: var(--accent);
+            background: var(--bg);
+            transform: translateY(-3px);
+        }
+
+        .contact-link-item:hover i {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .phone-number {
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .phone-number i {
+            color: var(--accent);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--bg-light);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-logo {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .copyright {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* ===========================
+           RESPONSIVE BREAKPOINTS
+           =========================== */
+
+        /* Tablets and Below (992px and smaller) */
+        @media (max-width: 992px) {
+            .hero-content { 
+                grid-template-columns: 1fr; 
+                text-align: center; 
+                gap: 40px;
+            }
+            .hero-text h1 { font-size: 48px; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { max-width: 500px; margin: 0 auto; }
+            .section-header h2 { font-size: 36px; }
+        }
+
+        /* Tablets (768px and smaller) */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 0 5px;
+            }
+            
+            .branding-grid, .website-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .portfolio-tabs button {
+                font-size: 13px;
+                padding: 10px 20px;
+            }
+            
+            .hero-text h1 { font-size: 40px; }
+            .section-header h2 { font-size: 32px; }
+            .section-header p { font-size: 16px; }
+            .contact-info h2 { font-size: 36px; }
+        }
+
+        /* Phones (600px and smaller) */
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+            
+            .video-wrapper {
+                border-radius: 10px;
+            }
+            
+            .branding-grid, .website-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0;
+            }
+            
+            .portfolio-tabs {
+                gap: 8px;
+                margin-bottom: 30px;
+            }
+            
+            .portfolio-tabs button {
+                font-size: 13px;
+                padding: 8px 18px;
+                min-height: 40px;
+            }
+            
+            .project-card img {
+                height: 200px;
+            }
+            
+            .project-info {
+                padding: 15px;
+            }
+            
+            .project-info h4 {
+                font-size: 16px;
+            }
+            
+            .project-info p {
+                font-size: 13px;
+            }
+            
+            .hero-text h1 { font-size: 32px; }
+            .hero-text p { font-size: 16px; }
+            .btn {
+                padding: 14px 28px;
+                font-size: 15px;
+            }
+            .hero-video-card, .hero-video-container {
+                max-width: 260px;
+            }
+            
+            .contact-info h2 { font-size: 32px; }
+            .contact-info p { font-size: 16px; }
+            .contact-link-item {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+
+        /* Small Phones (400px and smaller) */
+        @media (max-width: 400px) {
+            .video-grid {
+                gap: 15px;
+                max-width: 100%;
+            }
+            
+            .video-wrapper {
+                border-radius: 8px;
+            }
+            
+            .portfolio-tabs button {
+                font-size: 12px;
+                padding: 8px 16px;
+                min-height: 38px;
+            }
+            
+            .section-header h2 {
+                font-size: 28px;
+            }
+            
+            .section-header p {
+                font-size: 15px;
+                padding: 0 15px;
+            }
+            
+            .hero-text h1 { font-size: 28px; }
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .contact-info h2 { font-size: 28px; }
+            .contact-link-item {
+                font-size: 15px;
+                padding: 10px 18px;
+            }
+        }
+
+        /* Landscape Phones */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .video-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+            
+            .video-wrapper {
+                max-height: 400px;
+            }
+            
+            .hero {
+                min-height: auto;
+                padding: 100px 0 60px 0;
+            }
+        }
+
+        /* Touch Device Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .video-wrapper:hover {
+                transform: none;
+            }
+            
+            .portfolio-tabs button:active {
+                transform: scale(0.95);
+            }
+            
+            .project-card:hover {
+                transform: none;
+            }
+            
+            .process-card:hover {
+                transform: none;
+            }
+            
+            .service-card:hover {
+                transform: none;
+            }
+            
+            .contact-link-item:hover {
+                transform: none;
+            }
+        }
+
+        /* Mobile Navigation */
+        .nav-links.mobile-active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background: var(--bg-white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            gap: 15px;
+            min-width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">WEG<span>.</span></a>
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Work</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="#contact" class="nav-btn">Let's Talk</a>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        
+        <div class="container hero-content">
+            <div class="hero-text reveal">
+                <h1>Creative Marketing That <span class="gradient-text">Makes Brands Stand Out</span></h1>
+                <p>We are WEG. A digital agency crafting bold strategies, stunning visuals, and growth-focused campaigns for the modern world.</p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn btn-primary">View Our Work</a>
+                    <a href="#services" class="btn btn-outline">Our Services</a>
+                </div>
+            </div>
+            
+            <div class="hero-visual reveal">
+                <div class="hero-card hero-video-card">
+                    <div class="hero-video-container">
+                        <iframe src="https://drive.google.com/file/d/1RwFZ8tWBryydk6uq5BySiy6l9QGldvDz/preview" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about section-padding" id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>We Don't Just Create. <br>We <span class="gradient-text">Innovate.</span></h2>
+                <p>WEG is a team of strategists, designers, and storytellers. We believe that great design isn't just about looking good—it's about solving problems and driving results.</p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-card reveal">
+                    <i class="fas fa-chess-knight process-icon"></i>
+                    <h3>Strategy</h3>
+                    <p>Data-driven insights to position your brand ahead of the competition.</p>
+                </div>
+                <div class="process-card reveal">
+                    <i class="fas fa-pen-nib process-icon"></i>
+                    <h3>Creativity</h3>
+                    <p>Artistic direction that breaks the mold and captures attention instantly.</p>
+                </div>
+                <div class="process-card reveal">
+                    <i class="fas fa-layer-group process-icon"></i>
+                    <h3>Production</h3>
+                    <p>High-end execution in video, design, and development.</p>
+                </div>
+                <div class="process-card reveal">
+                    <i class="fas fa-rocket process-icon"></i>
+                    <h3>Growth</h3>
+                    <p>Continuous optimization to scale your reach and revenue.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services section-padding" id="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Our Expertise</h2>
+                <p>Comprehensive digital solutions tailored to your unique needs.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-hashtag"></i></div>
+                    <h3>Social Media Mgmt</h3>
+                    <p>Community building and content calendars that engage your audience daily.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-cut"></i></div>
+                    <h3>Video Editing</h3>
+                    <p>Reels, TikToks, and long-form content edited to perfection.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-fingerprint"></i></div>
+                    <h3>Branding</h3>
+                    <p>Complete visual identity systems including voice, tone, and style.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-palette"></i></div>
+                    <h3>Graphic Design</h3>
+                    <p>Marketing materials, social assets, and print design that pops.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Responsive, fast, and SEO-optimized websites built for conversion.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-feather-alt"></i></div>
+                    <h3>Script Writing</h3>
+                    <p>Compelling narratives for ads, social videos, and brand stories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO (MOBILE OPTIMIZED) -->
+    <section class="portfolio section-padding" id="portfolio">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Our <span class="gradient-text">Work</span></h2>
+                <p>Showcasing our creative projects across video, branding, and web development.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="portfolio-tabs reveal">
+                <button class="tab-btn active" onclick="showPortfolioTab('videos', this)">Videos</button>
+                <button class="tab-btn" onclick="showPortfolioTab('branding', this)">Branding</button>
+                <button class="tab-btn" onclick="showPortfolioTab('websites', this)">Websites</button>
+            </div>
+
+            <!-- Videos Section -->
+            <div id="videos" class="portfolio-content active">
+                <div class="video-grid">
+                    <div class="video-wrapper">
+                        <iframe src="https://drive.google.com/file/d/1E13U61V-ZCcDwotc04ws1yweJLvKSzEl/preview" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://drive.google.com/file/d/1M_20Qw3DMKtmTbr_zRHjkMM_7ZAi8AWK/preview" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://drive.google.com/file/d/13q1R1jJJI22Iek51JAtV71W6ktzwc8Sp/preview" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://drive.google.com/file/d/1pvtTtpT170xKOL8kZVwcalJogXbrNwJ9/preview" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://drive.google.com/file/d/1yynTVLqa2CWjRmCs_S6n4VXmRjErfWrp/preview" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://drive.google.com/file/d/1pvtTtpT170xKOL8kZVwcalJogXbrNwJ9/preview" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://drive.google.com/file/d/1oKhhlaSnGBLuzK0IFONkBNgOdznLKkRl/preview" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://drive.google.com/file/d/1pdaM1Xx0PKWffRugJTYqmrnhWjfE2TDO/preview" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://drive.google.com/file/d/1l6ZsmZRtn2SH6UhIlxznz__GOwDCfvx4/preview" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Branding Section -->
+            <div id="branding" class="portfolio-content">
+                <div class="branding-grid">
+                    <div class="project-card">
+                        <img src="https://drive.google.com/thumbnail?id=1sGiRLEulrMJN9H7064QGEoZXtGjFJoLi&sz=w1000" alt="Gez Perfume">
+                        <div class="project-info">
+                            <h4>Gez Perfume</h4>
+                            <p>Branding and logo design for perfume brand</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://drive.google.com/thumbnail?id=1lfMUgSkZubmrOnizvJCMSCiLbRBLNC_0&sz=w1000" alt="Afrosons">
+                        <div class="project-info">
+                            <h4>Afrosons</h4>
+                            <p>Complete brand identity and logo design</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://drive.google.com/thumbnail?id=1e4PcBlBDkXgO8jufIVuUw4JzAw3eFVnv&sz=w1000" alt="AWT Consulting">
+                        <div class="project-info">
+                            <h4>AWT Consulting</h4>
+                            <p>Professional branding for consulting services</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://drive.google.com/thumbnail?id=14oHyD24ds4cMj_wv0PNggZ-kvbEbwbrR&sz=w1000" alt="Kidus Studio">
+                        <div class="project-info">
+                            <h4>Kidus Studio</h4>
+                            <p>Creative studio branding and logo design</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://drive.google.com/thumbnail?id=1UcLli99UgvForS8qIc8592VWz8lyfou1&sz=w1000" alt="Mati Animal">
+                        <div class="project-info">
+                            <h4>Mati Animal</h4>
+                            <p>Animal care brand identity and logo</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://drive.google.com/thumbnail?id=1LirbcGb5OEZ4EUHqjoztghrTOxXZSyUr&sz=w1000" alt="Omosa's Construction">
+                        <div class="project-info">
+                            <h4>Omosa's Construction</h4>
+                            <p>Construction company branding and logo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Websites Section -->
+            <div id="websites" class="portfolio-content">
+                <div class="website-grid">
+                    <a class="project-card" href="https://afroheatfitness.com/" target="_blank">
+                        <img src="https://drive.google.com/thumbnail?id=11l5ls6iynRUVJsygCV1lKutaUse5zbdo&sz=w1000" alt="Afro Heat Fitness">
+                        <div class="project-info">
+                            <h4>Afro Heat Fitness</h4>
+                            <p>Fitness and wellness website</p>
+                        </div>
+                    </a>
+                    <a class="project-card" href="https://wingsofethiopia.com/" target="_blank">
+                        <img src="https://drive.google.com/thumbnail?id=15fOgTWteFx-IQ0x1qFOlJUdg6fdee57A&sz=w1000" alt="Wings of Ethiopia">
+                        <div class="project-info">
+                            <h4>Wings of Ethiopia</h4>
+                            <p>Ethiopian travel agency website</p>
+                        </div>
+                    </a>
+                    <a class="project-card" href="https://www.nattytattoo.com/" target="_blank">
+                        <img src="https://drive.google.com/thumbnail?id=1gePIjhJ8-ID4-mbtUmUxbgWW1kamTDNz&sz=w1000" alt="Natty Tattoo">
+                        <div class="project-info">
+                            <h4>Natty Tattoo</h4>
+                            <p>Custom tattoo studio portfolio</p>
+                        </div>
+                    </a>
+                    <a class="project-card" href="https://gold-technologies-web.vercel.app/" target="_blank">
+                        <img src="https://drive.google.com/thumbnail?id=1sMgq3LmuzVVo-cQbcoEWws8OJwpo0Xqd&sz=w1000" alt="Gold Technologies">
+                        <div class="project-info">
+                            <h4>Gold Technologies</h4>
+                            <p>Enterprise software solutions</p>
+                        </div>
+                    </a>
+                    <a class="project-card" href="https://magscafe.vercel.app/" target="_blank">
+                        <img src="https://drive.google.com/thumbnail?id=113hn1kQxxaZLwwe2Dk7MK30f-Ye1ZMma&sz=w1000" alt="Mags Cafe">
+                        <div class="project-info">
+                            <h4>Mags Cafe</h4>
+                            <p>Cafe website with menu and gallery</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT (UPDATED - CENTERED, NO FORM) -->
+    <section class="contact section-padding" id="contact">
+        <div class="container">
+            <div class="contact-wrapper reveal">
+                <div class="contact-info">
+                    <h2>Let's build something <span class="gradient-text">creative together.</span></h2>
+                    <p>Ready to elevate your brand? Reach out to us on social media or send us an email.</p>
+                    
+                    <div class="contact-links">
+                        <a href="https://www.instagram.com/weg.digital.marketing?igsh=MXgzZGI4bTFtbHhpcA==" class="contact-link-item" target="_blank">
+                            <i class="fab fa-instagram"></i> @weg.digital.marketing
+                        </a>
+                        <a href="https://tiktok.com/@weg.digital.marketing" class="contact-link-item" target="_blank">
+                            <i class="fab fa-tiktok"></i> @weg.digital.marketing
+                        </a>
+                        <a href="https://t.me/WegDM" class="contact-link-item" target="_blank">
+                            <i class="fab fa-telegram"></i> @wegDM
+                        </a>
+                        <a href="mailto:Wegdigitalmarketing@gmail.com" class="contact-link-item">
+                            <i class="fas fa-envelope"></i> WegDigitalMarketing@gmail.com
+                        </a>
+                    </div>
+                    
+                    <div class="phone-number">
+                        <i class="fas fa-phone"></i>
+                        <span>+251 972 521 305</span>
+                        <i class="fas fa-phone"></i>
+                        <span>+251 966 689 366</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">WEG.</a>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Portfolio Tab Function
+        function showPortfolioTab(tabName, btn) {
+            document.querySelectorAll('.portfolio-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            
+            document.querySelectorAll('.tab-btn').forEach(button => {
+                button.classList.remove('active');
+            });
+            btn.classList.add('active');
+        }
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('mobile-active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                navLinks.classList.remove('mobile-active');
+            }
+        });
+    </script>
+</body>
+</html>
