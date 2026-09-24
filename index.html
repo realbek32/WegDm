@@ -516,6 +516,7 @@
             color: var(--muted);
             font-size: 28px;
             background: var(--bg-light);
+            cursor: pointer;
         }
 
         .video-wrapper .video-placeholder i {
@@ -1035,17 +1036,35 @@
             <!-- Videos Section -->
             <!--
                 PERFORMANCE FIX:
-                Each Google Drive iframe is heavy (its own document, player JS, etc).
-                Loading 13 of them at once on page load was what crashed/slowed the page.
-                Fix: iframes are now lazy-loaded. Each wrapper stores its embed URL in
-                data-src instead of src, and a click-to-play placeholder shows on top.
-                An IntersectionObserver only injects the real iframe once a video
-                scrolls near the viewport AND only after the user clicks it,
-                so nothing heavy loads until it's actually needed.
+                Videos load strictly on click. Nothing but a placeholder + play icon
+                is rendered until the visitor taps a specific video, so the browser
+                never has more than one Drive iframe active at a time. This removes
+                any chance of every video trying to load simultaneously.
             -->
             <div id="videos" class="portfolio-content active">
                 <div class="video-grid">
-                     <div class="video-wrapper" data-src="https://drive.google.com/file/d/1C5lXXmmHTTMLmtB19loLfKobgylJc_Kl/preview">
+                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/14SOiaUfvtnKeCPVr6fy_OSvle0-wi5zw/preview">
+                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1B7Du0yqodYtWKMEs1xHSmxw4LLmdhFFC/preview">
+                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/136pWUA_M0e5FcWEWJ2d6ZYL2--9OZyGl/preview">
+                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1m18wMCaY_fSeVsVDrmBbuavapBdjx6nO/preview">
+                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1MUgPVPiKUNRc0mMfkWBf6NXUb1DCrBnc/preview">
+                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1byyzNjqiJoiiElArIi951uGkjqLgs8RC/preview">
+                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1xjaI6AoCQ91g736x7FZJ2pZjYuVEoo01/preview">
+                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1C5lXXmmHTTMLmtB19loLfKobgylJc_Kl/preview">
                         <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
                     </div>
                     <div class="video-wrapper" data-src="https://drive.google.com/file/d/1GYw8Yh_L92lBaHtmSyawcw9gQ8U_uDSe/preview">
@@ -1054,41 +1073,10 @@
                     <div class="video-wrapper" data-src="https://drive.google.com/file/d/1E13U61V-ZCcDwotc04ws1yweJLvKSzEl/preview">
                         <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
                     </div>
-                     <div class="video-wrapper" data-src="https://drive.google.com/file/d/1tOlBqjMyplN114heURLfnU2tnzB1yaZW/preview">
+                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1tOlBqjMyplN114heURLfnU2tnzB1yaZW/preview">
                         <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
                     </div>
-                     <div class="video-wrapper" data-src="https://drive.google.com/file/d/1uMftjSf3FYJFBEL73Dp1vl5iZw8gtwJm/preview">
-                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1M_20Qw3DMKtmTbr_zRHjkMM_7ZAi8AWK/preview">
-                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/13q1R1jJJI22Iek51JAtV71W6ktzwc8Sp/preview">
-                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1pvtTtpT170xKOL8kZVwcalJogXbrNwJ9/preview">
-                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1yynTVLqa2CWjRmCs_S6n4VXmRjErfWrp/preview">
-                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1pvtTtpT170xKOL8kZVwcalJogXbrNwJ9/preview">
-                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1oKhhlaSnGBLuzK0IFONkBNgOdznLKkRl/preview">
-                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1pdaM1Xx0PKWffRugJTYqmrnhWjfE2TDO/preview">
-                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1l6ZsmZRtn2SH6UhIlxznz__GOwDCfvx4/preview">
-                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <!-- New videos added -->
-                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/110o7rNkdFQCOxFPhZFYFJ0qBTmcHeYKC/preview">
-                        <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1D0PehnYv27AM_gciR9mAFYE9gdRbmvoY/preview">
+                    <div class="video-wrapper" data-src="https://drive.google.com/file/d/1uMftjSf3FYJFBEL73Dp1vl5iZw8gtwJm/preview">
                         <div class="video-placeholder"><i class="fas fa-play-circle"></i></div>
                     </div>
                 </div>
@@ -1276,11 +1264,10 @@
             }
         });
 
-        // --- LAZY-LOAD VIDEO IFRAMES (crash fix) ---
-        // Each video only turns into a real iframe once the user clicks its
-        // placeholder AND it's currently in/near the viewport. This means the
-        // page never has more than a handful of Drive iframes loaded at once,
-        // instead of all 13 loading simultaneously on page load.
+        // --- CLICK-TO-LOAD VIDEO IFRAMES (crash fix) ---
+        // No video's iframe exists until its placeholder is clicked. This is the
+        // strictest possible fix for "everything loads at once": at most one
+        // heavy Google Drive iframe gets created per click, ever.
         function loadVideo(wrapper) {
             if (wrapper.dataset.loaded) return;
             const src = wrapper.getAttribute('data-src');
@@ -1295,26 +1282,9 @@
             wrapper.dataset.loaded = 'true';
         }
 
-        const videoWrappers = document.querySelectorAll('.video-wrapper[data-src]');
-
-        // Click-to-play: user taps the placeholder to load that one video
-        videoWrappers.forEach(wrapper => {
+        document.querySelectorAll('.video-wrapper[data-src]').forEach(wrapper => {
             wrapper.addEventListener('click', () => loadVideo(wrapper), { once: true });
         });
-
-        // Also lazily preload a video once it's about to scroll into view,
-        // so it's ready without needing extra clicks while browsing —
-        // but only one at a time, well after page load, never all at once.
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    loadVideo(entry.target);
-                    videoObserver.unobserve(entry.target);
-                }
-            });
-        }, { rootMargin: '200px 0px', threshold: 0.01 });
-
-        videoWrappers.forEach(wrapper => videoObserver.observe(wrapper));
     </script>
 </body>
 </html>
